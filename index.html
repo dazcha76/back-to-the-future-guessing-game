@@ -7,9 +7,42 @@
     <script type="text/javascript" src="main.js"></script>
   </head>
   
-  <body onload="pick_number">
-    <input type="text" name="guess_input" id="guess_input">
-    <button>Submit</button>
-    <div id="response_div"></div>
+  <body onload="pick_number, intro">
+
+    <audio id="theme" src="sounds/themesong.mp3"></audio>
+    
+    <!----------- intro modal ----------->
+    <div class="intro_modal">
+      <div class="introImage">
+        <img src="images/docbrown.png" class="doc_brown">
+      </div>
+      <div class="introText">
+        <h1 id="intro"></h1>
+      </div>
+
+      <div class="skip">
+        <span class="top l1">s</span><span class="top l2">k</span><span class="top l3">i</span><span class="top l4">p</span><br>
+        <span class="bottom l5">I</span><span class="bottom l4">N</span><span class="bottom l3">T</span><span class="bottom l2">R</span><span class="bottom l1">O</span>
+      </div>
+    </div>
+
+    <!----------- game area ----------->
+    <div class="game_area">
+
+      <div class="guess_div">
+        OCT <input type="text" name="guess_input" id="guess_input"> 1985 01:24
+        <br>
+        <button>Submit</button>
+        <div id="response_div"></div>
+      </div>
+
+      <div class="fire"></div>
+      
+
+      <div class="delorean_container">
+        <img src="images/delorean.png" class="delorean">
+      </div>  
+
+    </div>
   </body>
 </html>
