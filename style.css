@@ -1,0 +1,246 @@
+@font-face {
+  font-family: 'Back To The Future';
+  src: url(BTTF.ttf);
+  font-style: bold;
+  font-weight: bold;
+} 
+
+@font-face {
+  font-family: 'Digital Clock';
+  src: url(DS-DIGIT.TTF );
+  font-style: bold;
+  font-weight: bold;
+} 
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  background-color: black;
+  overflow: hidden;
+  font-family: 'Back To The Future', sans-serif;
+}
+
+.hidden {
+  display: none;
+}
+
+/*-------------- INTRO MODAL --------------*/
+
+.intro-modal {
+  width: 100vw;
+  height: 100vh;
+}
+
+.flex {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+}
+
+h1,
+.skip {
+  background: -webkit-linear-gradient(#f00, #ff0);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+h1 {
+  font-size: 40px;
+}
+
+.skip {
+  position: absolute;
+  bottom: 20px;
+  right: 20px;
+  cursor: pointer;
+  font-size: 20px;
+  text-align: center;
+}
+
+.introImage {
+  width: 30vw;
+  padding: 30px 20px;
+}
+
+.doc-brown {
+  width: 90%;
+}
+
+.introText {
+  width: 50vw;
+  text-align: center;
+  padding: 20px 30px;
+}
+
+.logo {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 0 20px;
+}
+
+.back, .future {
+  width: 100%;
+}
+
+.back {
+  margin-left: 110vw;
+  animation-name: moveBack;
+  animation-duration: 1s;
+  animation-fill-mode: forwards;
+}
+
+@keyframes moveBack {
+  from {margin-left: 110vw}
+  to {margin-left: 0}
+}
+
+.future {
+  margin-left: -180vw;
+  animation-name: moveFuture;
+  animation-duration: 1s;
+  animation-fill-mode: forwards;
+}
+
+@keyframes moveFuture {
+  from {margin-left: -180vw}
+  to {margin-left: 0}
+}
+
+
+
+/*-------------- GAME AREA --------------*/
+
+.game-area {
+  height: 100vh;
+  width: 100vw;
+  padding: 20px;
+}
+
+.guess-div {
+  font-family: 'Digital Clock', sans-serif;
+  height: 20vh;
+  width: 70vw;
+  margin: 10vh auto;
+  text-align: center;
+  font-size: 10vh;
+  color: red;
+  letter-spacing: 1vw;
+}
+
+input[type='text'] {
+  height: 7vh;
+  width: 5vw;
+  font-size: 10vh;
+  text-align: center;
+  font-family: 'Digital Clock', sans-serif;
+  color: red;
+  background-color: black;
+  border: none;
+  border-bottom: 5px solid red;
+  caret-color: black;
+  animation-name: blink;
+  animation-duration: 1s;
+  animation-iteration-count: infinite;
+  outline: none;
+}
+
+@keyframes blink {
+  from {border-bottom: 5px solid red;}
+  to {border-bottom: 5px solid black;}
+
+}
+
+.button {
+  width: 200px;
+  padding: 15px;
+  font-family: 'Digital Clock', sans-serif;
+  font-size: 25px;
+  color: black;
+  background-color: red;
+  margin: 50px auto;
+  border-radius: 5px;
+}
+
+#response-div {
+  font-family: 'Back To The Future', sans-serif;
+  margin-top: 15%;
+  font-size: 8vh;
+  background: -webkit-linear-gradient(#f00, #ff0);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.delorean-container {
+  width: 100%;
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  background-color: black;
+}
+
+.delorean {
+  height: 25vh;
+  width: auto;
+  transform: scaleX(-1);
+  filter: FlipH;
+}
+
+.fire {
+  background: url("images/fire.gif") repeat-x left bottom;
+  background-size: 18% auto;
+  transform: scaleX(-1);
+  filter: FlipH;
+  height: 10vh;
+  width: 100vw;
+  position: absolute;
+  bottom: 0;
+  left: 0;
+}
+
+@keyframes drive {
+  from {left: 0;}
+  to {left: 110%;}
+}
+
+.animate-car {
+  animation-name: drive;
+  animation-duration: 1s;
+  animation-fill-mode: forwards;
+}
+
+/*--------------- MEDIA QUERIES ---------------*/
+
+@media (max-width: 750px){
+  h1 {
+    font-size: 20px;
+  }
+}
+
+@media (max-width: 414px){
+  .flex {
+    display: block;
+  }
+
+  .introImage {
+    width: 100vw;
+    text-align: center;
+  }
+
+  .doc-brown {
+    width: 50%;
+  }
+
+  .introText {
+    width: 100vw;
+    text-align: center;
+  }
+
+  h1 {
+    font-size: 20px;
+  }
+}
