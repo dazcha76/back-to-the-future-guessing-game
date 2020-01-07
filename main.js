@@ -1,25 +1,21 @@
 $(document).ready(init);
 
-function init(){
-  document.getElementById("theme").play();
-  $('.skip').click(removeModal)
-  $('button').click(make_guess);
-  $('.game_area').hide();
-  pick_number();
-  intro(); 
-}
-
 var the_number = null;
 var guesses = 0;
-
-var theme = 'sounds/themesong.mp3';
-
 var sounds = [
   'sounds/peel_out.mp3',
   'sounds/damn.mp3', 
   'sounds/damndamn.mp3',
   'sounds/thinkmcfly.mp3',
 ]; 
+
+function init(){
+  intro();
+  pick_number();
+  $('.skip').click(removeModal);
+  $('.button').click(make_guess);
+  $('.restart').click(restartGame);
+}
 
 function playSound(soundIndex){
   var sound = sounds[soundIndex];
@@ -53,7 +49,7 @@ function showText(introIndex) {
     "you have 3 chances to guess the correct number or he will be stuck here in 1955.",
     "i'm counting on you to help me send marty..."
   ];
-  $('.intro_modal').addClass('flex');
+  $('.intro-modal').addClass('flex');
   $('#intro').text(introText[introIndex].toUpperCase());
 }
 
@@ -64,14 +60,13 @@ function emptyH1(){
 function backToTheFuture(){
   var back = $('<img>').attr('src', 'images/back.png').addClass("back");
   var future = $('<img>').attr('src', 'images/future.png').addClass("future");
-  $('.intro_modal').empty().removeClass('flex').append(back, future).css({'text-align': 'center', 'margin-top': '10vh', 'padding': '5%'});
+  $('.intro-modal').removeClass('flex').addClass('logo').empty().append(back, future);
 }
 
 function removeModal(){
-  $('.intro_modal').hide();
-  $('.game_area').show();
-  $('#guess_input').focus();
-  document.getElementById("theme").pause();
+  $('.intro-modal').remove().addClass('hidden');
+  $('.game-area').removeClass('hidden');
+  $('#guess-input').focus();
 }
 
 function pick_number(){
@@ -82,25 +77,26 @@ function pick_number(){
 }
 
 function make_guess(){
-  var the_guess = $('#guess_input').val();
+  var the_guess = $('#guess-input').val();
   var numGuess = Number(the_guess);
 
   if(numGuess < 1 || numGuess > 10 || the_guess.match(/[a-zA-Z]/)){
-    $('#response_div').text("THAT'S INVALID!");
+    $('#response-div').text("THAT'S INVALID!");
   } else {
     guesses++
     if(numGuess === the_number){
-      $('#response_div').text("YOU WIN!");
-      $('.delorean_container').addClass('animate_car');
+      $('#response-div').text("YOU WIN!");
+      $('.delorean-container').addClass('animate-car');
       playSound(0);
       $('input').prop("disabled", true);
+      restartGame();
     } else {
-      $('#guess_input').val("");
-      $('#guess_input').focus();
+      $('#guess-input').val("");
+      $('#guess-input').focus();
       if(numGuess < the_number){
-        $('#response_div').text("TOO LOW!")
+        $('#response-div').text("TOO LOW!")
       } else if(numGuess > the_number){
-        $('#response_div').text("TOO HIGH!")
+        $('#response-div').text("TOO HIGH!")
       }
 
       if(guesses === 1){
@@ -109,10 +105,20 @@ function make_guess(){
         playSound(2);
       } else if(guesses === 3){
         playSound(3);
-        $('#response_div').text("YOU LOSE!");
+        $('#response-div').text("YOU LOSE!");
         $('input').prop("disabled", true).val('X');
+        restartGame();
       }
     }
   } 
 }
+
+function restartGame(){
+  removeModal();
+  pick_number();
+  $('input').prop("disabled", true).val('');
+  guesses = 0;
+  $('#response-div').text("");
+}
+
 
